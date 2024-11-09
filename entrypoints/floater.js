@@ -2,6 +2,7 @@ import {defineUnlistedScript} from "wxt/sandbox";
 
 export default defineUnlistedScript(() => {
 const floater = document.createElement('div');
+const MAX_CONNECT = 50;
 
 floater.id = "testFloater";
 
@@ -27,35 +28,37 @@ floater.addEventListener('mouseenter', () => {
 });
 
 floater.addEventListener('mouseleave', () => {
-    floater.style.backgroundColor = '#0D92F4';
+    floater.style.backgroundColor = '#20577f';
 });
 
 floater.textContent = 'Connect With All';
 
-    floater.addEventListener('click', () => {
-        const connectButtons = Array.from(document.querySelectorAll('button'))
-            .filter(button => button.innerText.trim() === "Follow" && button.offsetParent !== null);
+floater.addEventListener('click', () => {
 
-        console.log(connectButtons, "connectButtons");
+    const connectButtons = Array.from(document.querySelectorAll('button'))
+        .filter(button => button.innerText.trim() === "Follow" && button.offsetParent !== null);
 
-        if(!connectButtons.length) {
-            alert("Sorry, no connect button found");
-            return;
-        }
+    if(!connectButtons.length) {
+        alert("Sorry, no connect button found");
+        return;
+    }
 
-        function handleConnectClick(button, i) {
-            if(i === 5) return;
+    for(let i=0; i < Math.min(connectButtons.length, MAX_CONNECT); i++) {
+        let connectButton = connectButtons[i];
 
-            setTimeout(() => {
-                button.click();
-                if(i === Math.min(connectButtons.length - 1, 4)) {
-                    alert("connect buttons clicked");
-                }
-            }, i * 2000);
-        }
+        // connect click handler
+        handleConnectClick(connectButton, i)
+    }
 
-        connectButtons.map((button, i) => handleConnectClick(button, i));
-    });
+    function handleConnectClick(button, i){
+        setTimeout(() => {
+            button.click();
+            // delay of 2 seconds
+        }, i * 2000)
+    }
+
+
+});
 
 
 document.body.appendChild(floater);
