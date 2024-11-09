@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import reactLogo from '@/src/assets/react.svg';
-import wxtLogo from '/wxt.svg';
 import './App.css';
 
 function App() {
@@ -10,6 +8,7 @@ function App() {
     <>
         <div>Hello World</div>
         <button onClick={() => setCount(prev => prev + 1)}>Count is {count}</button>
+        <a href="https://www.linkedin.com" target={"_blank"}>Open linkedin</a>
     </>
   );
 }
