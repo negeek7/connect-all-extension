@@ -44,6 +44,7 @@ floater.addEventListener('click', () => {
     }
 
     for(let i=0; i < Math.min(connectButtons.length, MAX_CONNECT); i++) {
+
         let connectButton = connectButtons[i];
 
         // connect click handler
