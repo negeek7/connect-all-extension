@@ -22,7 +22,13 @@ floater.style.zIndex = '1000';
 floater.textContent = 'Connect to all';
 
 floater.addEventListener('click', () => {
-    console.log("Connect to All")
+
+    const connectButtons = Array.from(document.querySelectorAll('button'))
+        .filter(button => button.innerText.trim() === "Follow" && button.offsetParent !== null);
+
+    console.log(connectButtons, "connectButtons");
+    connectButtons[1].click();
+    alert("connect button clicked");
 });
 
 
