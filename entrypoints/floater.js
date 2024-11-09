@@ -21,15 +21,31 @@ floater.style.zIndex = '1000';
 
 floater.textContent = 'Connect to all';
 
-floater.addEventListener('click', () => {
+    floater.addEventListener('click', () => {
+        const connectButtons = Array.from(document.querySelectorAll('button'))
+            .filter(button => button.innerText.trim() === "Follow" && button.offsetParent !== null);
 
-    const connectButtons = Array.from(document.querySelectorAll('button'))
-        .filter(button => button.innerText.trim() === "Follow" && button.offsetParent !== null);
+        console.log(connectButtons, "connectButtons");
 
-    console.log(connectButtons, "connectButtons");
-    connectButtons[1].click();
-    alert("connect button clicked");
-});
+        if(!connectButtons.length) {
+            alert("Sorry, no connect button found");
+            return;
+        }
+
+        function handleConnectClick(button, i) {
+            if(i === 5) return;
+
+            setTimeout(() => {
+                button.click();
+                // Show alert after last button is clicked
+                if(i === Math.min(connectButtons.length - 1, 4)) {
+                    alert("connect buttons clicked");
+                }
+            }, i * 2000);
+        }
+
+        connectButtons.forEach((button, i) => handleConnectClick(button, i));
+    });
 
 
 document.body.appendChild(floater);
