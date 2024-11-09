@@ -44,11 +44,11 @@ floater.addEventListener('click', () => {
     }
 
     for(let i=0; i < Math.min(connectButtons.length, MAX_CONNECT); i++) {
-
         let connectButton = connectButtons[i];
 
         // connect click handler
         handleConnectClick(connectButton, i)
+        floater.textContent = "Undo";
     }
 
     function handleConnectClick(button, i){
@@ -57,8 +57,6 @@ floater.addEventListener('click', () => {
             // delay of 2 seconds
         }, i * 2000)
     }
-
-
 });
 
 
